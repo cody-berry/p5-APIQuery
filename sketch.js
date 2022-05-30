@@ -7,8 +7,10 @@
 let font
 let instructions
 let debugCorner /* output debug text in the bottom left corner of the canvas */
+let jsonData /* the json data that we retrieve from the scryfall API */
 
-// api.scryfall.com/cards/search?q=set:snc
+// api.scryfall.com/cards/search?q=set:snc   is the link to the first page
+// of the cards in Streets of New Capenna (snc)
 
 
 function preload() {
@@ -28,6 +30,9 @@ function setup() {
         numpad 1 → freeze sketch</pre>`)
 
     debugCorner = new CanvasDebugCorner(5)
+
+    jsonData = loadJSON('https://api.scryfall.com/cards/search?q=set:snc')
+    console.log(jsonData)
 }
 
 
