@@ -3,11 +3,10 @@
  *  @date 2022.05.30
  *  ☒ Load a single json file. If it's loaded, print the data to make sure
  *  that it's working.
- *  ☒ Make the call of loadJSON() have a callback function, gotData.
- *  Store the
+ *  ☒ Make the call of loadJSON() have a callback function, gotData. Store the
  *  data in a variable and print it out.
- *  If has_next is true, call loadJSON with a callback function of gotData
- *  itself with a url of next_page.
+ *  If the data's has_next is true, call loadJSON with a callback function of
+ *  gotData itself with the url of next_page.
  *  Concatenate the json files and print it out.
  *  Create a function that will check the data, iterate through all the
  *  cards and print their names.
@@ -41,6 +40,7 @@ function setup() {
     debugCorner = new CanvasDebugCorner(5)
 
     loadJSON('https://api.scryfall.com/cards/search?q=set:snc', gotData)
+    loadJSON('https://api.scryfall.com/cards/search?q=set:neo', gotData)
 }
 
 
@@ -49,6 +49,12 @@ function setup() {
 function gotData(data) {
     jsonData = data
     console.log(jsonData)
+
+    // but if the data's hasNext property is true, we should use the next
+    // page's url and recursively call this function!
+    if (data['has_more']) {
+        loadJSON(data['next_page'], gotData)
+    }
 }
 
 
