@@ -5,9 +5,9 @@
  *  that it's working.
  *  ☒ Make the call of loadJSON() have a callback function, gotData. Store the
  *  data in a variable and print it out.
- *  If the data's has_next is true, call loadJSON with a callback function of
+ *  ☒ If the data's has_next is true, call loadJSON with a callback function of
  *  gotData itself with the url of next_page.
- *  Concatenate the json files and print it out.
+ *  ☒ Concatenate the json files and print it out.
  *  Create a function that will check the data, iterate through all the
  *  cards and print their names.
  */
@@ -15,7 +15,7 @@
 let font
 let instructions
 let debugCorner /* output debug text in the bottom left corner of the canvas */
-let jsonData /* the json data that we retrieve from the scryfall API */
+let jsonData = [] /* the json data that we retrieve from the scryfall API */
 
 // api.scryfall.com/cards/search?q=set:snc   is the link to the first page
 // of the cards in Streets of New Capenna (snc)
@@ -47,7 +47,7 @@ function setup() {
 // called when we've retrieved the data from loadJSON. The first argument is
 // the data that we retrieved from the loadJSON call.
 function gotData(data) {
-    jsonData = data
+    jsonData = jsonData.concat(data['data'])
     console.log(jsonData)
 
     // but if the data's hasNext property is true, we should use the next
