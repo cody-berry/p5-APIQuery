@@ -1,7 +1,16 @@
 /**
  *  @author Cody
  *  @date 2022.05.30
- *
+ *  ☒ Load a single json file. If it's loaded, print the data to make sure
+ *  that it's working.
+ *  ☒ Make the call of loadJSON() have a callback function, gotData.
+ *  Store the
+ *  data in a variable and print it out.
+ *  If has_next is true, call loadJSON with a callback function of gotData
+ *  itself with a url of next_page.
+ *  Concatenate the json files and print it out.
+ *  Create a function that will check the data, iterate through all the
+ *  cards and print their names.
  */
 
 let font
@@ -31,7 +40,14 @@ function setup() {
 
     debugCorner = new CanvasDebugCorner(5)
 
-    jsonData = loadJSON('https://api.scryfall.com/cards/search?q=set:snc')
+    loadJSON('https://api.scryfall.com/cards/search?q=set:snc', gotData)
+}
+
+
+// called when we've retrieved the data from loadJSON. The first argument is
+// the data that we retrieved from the loadJSON call.
+function gotData(data) {
+    jsonData = data
     console.log(jsonData)
 }
 
