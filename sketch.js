@@ -58,6 +58,17 @@ function gotData(data) {
 }
 
 
+// based on the card data given, this function will find the names of all
+// the cards and print the list of them.
+function grabNames(data) {
+    let names = []
+    for (let card of data) {
+        names.push(card['name'])
+    }
+    return names
+}
+
+
 function draw() {
     background(234, 34, 24)
 
@@ -66,6 +77,11 @@ function draw() {
     debugCorner.setText(`frameCount: ${frameCount}`, 2)
     debugCorner.setText(`fps: ${frameRate().toFixed(0)}`, 1)
     debugCorner.show()
+
+    if (frameCount === 200) {
+        console.log(jsonData)
+        console.log(grabNames(jsonData))
+    }
 
     if (frameCount > 3000)
         noLoop()
